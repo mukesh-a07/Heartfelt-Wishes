@@ -1,0 +1,104 @@
+/**
+ * DESIGN TOKENS & SYSTEM VARIABLES
+ * Cinematic 21st Birthday Website
+ */
+
+:root {
+  /* ==========================================================================
+     Color System
+     ========================================================================== */
+  --bg-primary: #09070B;          /* Midnight Obsidian (Primary canvas) */
+  --bg-secondary: #160D1B;        /* Deep Plum (Atmospheric alternate) */
+  --bg-tertiary: #1F1227;         /* Deep Wine (Chamber depth) */
+  --bg-card: rgba(22, 13, 27, 0.6);
+  --bg-modal: rgba(5, 3, 7, 0.94);
+
+  --accent-gold: #D9B56D;         /* Champagne Gold (Visual signature) */
+  --accent-gold-light: #E8CF96;   /* Golden highlight */
+  --accent-gold-dark: #A6833D;    /* Antique shadow */
+  --accent-rose: #C9829B;         /* Soft Rose (Warm emotional accent) */
+  --accent-rose-dark: #8F4C65;
+
+  --text-primary: #F5EFE5;        /* Ivory (Primary reading text) */
+  --text-secondary: #A9A0A8;      /* Warm Gray (Supporting metadata) */
+  --text-muted: #6B626A;          /* Faded Gray (Labels & watermarks) */
+
+  /* ==========================================================================
+     Borders, Glassmorphism & Atmospheric Glows
+     ========================================================================== */
+  --border-gold-subtle: rgba(217, 181, 109, 0.18);
+  --border-gold-medium: rgba(217, 181, 109, 0.38);
+  --border-gold-glow: rgba(217, 181, 109, 0.7);
+  --border-glass: rgba(245, 239, 229, 0.08);
+
+  --glass-bg: rgba(22, 13, 27, 0.55);
+  --glass-bg-hover: rgba(31, 18, 39, 0.75);
+  --glass-blur: blur(16px);
+
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-atmospheric: 0 10px 40px rgba(0, 0, 0, 0.6);
+  --glow-gold-sm: 0 0 16px rgba(217, 181, 109, 0.25);
+  --glow-gold-lg: 0 0 38px rgba(217, 181, 109, 0.45);
+  --glow-rose-sm: 0 0 20px rgba(201, 130, 155, 0.25);
+
+  /* ==========================================================================
+     Typography Hierarchy
+     ========================================================================== */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-tamil: 'Noto Serif Tamil', 'Latha', serif;
+
+  /* Fluid Responsive Font Scales */
+  --fs-micro: clamp(0.6875rem, 0.65rem + 0.2vw, 0.8125rem);      /* 11px - 13px */
+  --fs-caption: clamp(0.8125rem, 0.75rem + 0.3vw, 0.9375rem);    /* 13px - 15px */
+  --fs-body: clamp(0.9375rem, 0.875rem + 0.3vw, 1.0625rem);      /* 15px - 17px */
+  --fs-h4: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);              /* 18px - 22px */
+  --fs-h3: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);             /* 22px - 30px */
+  --fs-h2: clamp(1.875rem, 1.45rem + 2vw, 2.75rem);              /* 30px - 44px */
+  --fs-h1: clamp(2.5rem, 1.8rem + 3.5vw, 4.5rem);                /* 40px - 72px */
+  --fs-hero: clamp(3.2rem, 2.2rem + 6vw, 7.5rem);                /* 52px - 120px */
+
+  /* ==========================================================================
+     Motion, Timing & Easing Curves (Unified System — Phase 5)
+     ========================================================================== */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);    /* Smooth cinematic deceleration, non-bouncy */
+  --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Gentle natural reading curve */
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);/* S-curve transition */
+
+  --duration-fast: 220ms;
+  --duration-normal: 450ms;
+  --duration-reveal: 750ms;       /* Standard reveal: 650–850ms */
+  --duration-hero: 1050ms;        /* Hero-level reveal: 900–1200ms */
+  --duration-image: 800ms;        /* Image reveal: 750–900ms */
+  --duration-cinematic: 1300ms;
+
+  --stagger-step: 120ms;          /* Stagger delay: 100–150ms between related elements */
+
+  /* ==========================================================================
+     Spacing & Layout Scales
+     ========================================================================== */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6.5rem;
+  --space-section: clamp(4.5rem, 7vw + 2rem, 9.5rem);
+
+  --max-width-text: 65ch;
+  --max-width-content: 1120px;
+  --max-width-wide: 1380px;
+
+  /* ==========================================================================
+     Z-Index Architectural Layers
+     ========================================================================== */
+  --z-bg: 0;
+  --z-grain: 5;
+  --z-vignette: 6;
+  --z-dust: 7;
+  --z-content: 10;
+  --z-nav: 50;
+  --z-modal: 100;
+  --z-gate: 200;
+  --z-cursor: 999;
+}

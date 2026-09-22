@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Phase 5: Advanced Unified Motion System
+   Cinematic Animation Language, Standardized Reveals, Staggers,
+   GPU Performance Safeguards & Global Accessibility Reset
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Standard Reveal Language (30–45px Y, 650–850ms, Opacity 0 -> 1)
+   ========================================================================== */
+.motion-reveal,
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity var(--duration-reveal) var(--ease-cinematic),
+              transform var(--duration-reveal) var(--ease-cinematic);
+}
+
+.motion-reveal.is-in-view,
+.reveal-on-scroll.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   2. Hero-Level Reveal (Scale 0.96 -> 1, 900–1200ms, Opacity 0 -> 1)
+   ========================================================================== */
+.motion-reveal-hero {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity var(--duration-hero) var(--ease-cinematic),
+              transform var(--duration-hero) var(--ease-cinematic);
+}
+
+.motion-reveal-hero.is-in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   3. Image Reveal (Subtle Opacity, Subtle Vertical, Restrained Scale)
+   ========================================================================== */
+.motion-reveal-image {
+  opacity: 0;
+  transform: translateY(18px) scale(1.02);
+  filter: blur(10px);
+  transition: opacity var(--duration-image) var(--ease-cinematic),
+              transform var(--duration-image) var(--ease-cinematic),
+              filter var(--duration-image) var(--ease-cinematic);
+}
+
+.motion-reveal-image.is-in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
+}
+
+/* ==========================================================================
+   4. Staggered Delay Utilities (100–150ms Intervals)
+   ========================================================================== */
+.stagger-1 { transition-delay: calc(var(--stagger-step) * 1) !important; }
+.stagger-2 { transition-delay: calc(var(--stagger-step) * 2) !important; }
+.stagger-3 { transition-delay: calc(var(--stagger-step) * 3) !important; }
+.stagger-4 { transition-delay: calc(var(--stagger-step) * 4) !important; }
+.stagger-5 { transition-delay: calc(var(--stagger-step) * 5) !important; }
+.stagger-6 { transition-delay: calc(var(--stagger-step) * 6) !important; }
+
+/* ==========================================================================
+   5. Standardized Section Headers
+   ========================================================================== */
+.section-header-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--duration-reveal) var(--ease-cinematic),
+              transform var(--duration-reveal) var(--ease-cinematic);
+}
+
+.section-header-reveal.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   6. Custom Cursor Motion & Interactions (Desktop Only)
+   ========================================================================== */
+.custom-cursor {
+  mix-blend-mode: normal;
+  pointer-events: none;
+  border: 1px solid rgba(217, 181, 109, 0.4);
+  background-color: transparent;
+  transition: width 0.32s var(--ease-cinematic),
+              height 0.32s var(--ease-cinematic),
+              border-color 0.32s ease,
+              background-color 0.32s ease,
+              opacity 0.25s ease;
+}
+
+.custom-cursor.is-expanded {
+  width: 58px;
+  height: 58px;
+  background-color: rgba(217, 181, 109, 0.95);
+  border-color: var(--accent-gold-light);
+  box-shadow: 0 0 24px rgba(217, 181, 109, 0.45);
+}
+
+.custom-cursor.is-expanded .custom-cursor-text {
+  opacity: 1;
+  color: var(--bg-primary);
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.custom-cursor.is-hidden {
+  opacity: 0;
+}
+
+.custom-cursor-dot.is-hidden {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   7. Mobile & GPU Performance Safeguards
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Suppress heavy blur transforms on lower-powered mobile GPUs */
+  .motion-reveal-image {
+    filter: none !important;
+    transform: translateY(16px);
+  }
+
+  .motion-reveal-image.is-in-view {
+    transform: translateY(0);
+  }
+
+  /* Disable battery-draining continuous idle animations on mobile */
+  .hero-photo.is-revealed {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   8. Global Accessibility & Reduced-Motion Mode
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-reveal,
+  .reveal-on-scroll,
+  .motion-reveal-hero,
+  .motion-reveal-image,
+  .section-header-reveal,
+  .kavithai-card,
+  .timeline-item,
+  .timeline-card,
+  .timeline-photo,
+  .timeline-card-header,
+  .timeline-media-wrapper,
+  .timeline-body,
+  .timeline-node,
+  .timeline-node-inner,
+  .hero-photo,
+  .hero-masthead,
+  .hero-title,
+  .hero-subtitle,
+  .hero-scroll-hint,
+  .hero-issue-tags,
+  .vault-container {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  #dust-canvas {
+    display: none !important;
+  }
+
+  .kavithai-caret {
+    display: none !important;
+  }
+
+  .timeline-spine-fill {
+    height: 100% !important;
+    transition: none !important;
+  }
+
+  .custom-cursor,
+  .custom-cursor-dot {
+    display: none !important;
+  }
+}

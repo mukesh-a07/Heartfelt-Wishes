@@ -1,0 +1,170 @@
+/* Main Layout, Atmospheric Layers & Editorial Base */
+
+/* Background Atmosphere */
+body {
+  background: radial-gradient(circle at 50% 20%, #160D1B 0%, #09070B 65%, #050406 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Atmospheric Fixed Overlays */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/images/grain.svg');
+  background-repeat: repeat;
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: var(--z-grain);
+}
+
+.cinematic-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, transparent 45%, rgba(5, 3, 6, 0.7) 100%);
+  pointer-events: none;
+  z-index: var(--z-vignette);
+}
+
+/* Canvas for Cinema Projector Dust Particles */
+#dust-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: var(--z-dust);
+}
+
+/* Typography Classes */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.font-tamil {
+  font-family: var(--font-tamil);
+  line-height: 1.8;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.text-gold-light {
+  color: var(--accent-gold-light);
+}
+
+.text-rose {
+  color: var(--accent-rose);
+}
+
+.text-ivory {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* Editorial Typography Styles */
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1.25rem;
+}
+
+.editorial-badge::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background-color: var(--accent-gold);
+}
+
+.editorial-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 12vw, 15rem);
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(217, 181, 109, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Section Architecture */
+.scene {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-section) var(--space-sm);
+  z-index: var(--z-content);
+  isolation: isolate;
+}
+
+.scene-container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.scene-container-wide {
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Divider */
+.editorial-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  margin: var(--space-md) auto;
+}
+
+/* Screen reader utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Hidden state */
+.is-hidden {
+  display: none !important;
+}

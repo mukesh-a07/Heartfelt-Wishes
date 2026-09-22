@@ -1,0 +1,658 @@
+/* ==========================================================================
+   Phase 6: Interactive Memories, Celestial Constellation & Easter Eggs Styles
+   ========================================================================== */
+
+/* ==========================================================================
+   1. The Memory Constellation Section (#scene-interactive)
+   ========================================================================== */
+.scene-constellation {
+  background: radial-gradient(circle at 50% 40%, #160A1F 0%, #0E0714 50%, #09070B 90%);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(6rem, 10vw, 11rem) clamp(1.25rem, 4vw, 3.5rem);
+  box-sizing: border-box;
+}
+
+.constellation-ambient-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(350px, 65vw, 850px);
+  height: clamp(350px, 65vw, 850px);
+  background: radial-gradient(circle, rgba(217, 181, 109, 0.05) 0%, rgba(201, 130, 155, 0.03) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.constellation-header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.constellation-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  padding: 0.4rem 1.15rem;
+  border: 1px solid rgba(217, 181, 109, 0.25);
+  border-radius: 24px;
+  background: rgba(217, 181, 109, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.constellation-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+  line-height: 1.25;
+}
+
+.constellation-sub-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  max-width: 60ch;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Constellation Stage Box */
+.constellation-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  height: clamp(380px, 52vw, 540px);
+  margin: 0 auto;
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 16px;
+  background: rgba(14, 8, 18, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-atmospheric);
+  overflow: hidden;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+#constellation-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+.constellation-status {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.constellation-hint {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Accessible Star Buttons for Keyboard Navigation (visually hidden but focusable) */
+.constellation-accessible-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.constellation-accessible-nav:focus-within {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: auto;
+  height: auto;
+  clip: auto;
+  overflow: visible;
+  background: rgba(14, 8, 18, 0.95);
+  border: 1px solid var(--accent-gold);
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.constellation-star-btn {
+  background: rgba(22, 13, 27, 0.8);
+  border: 1px solid var(--accent-gold);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Star Memory Lightbox Dialog */
+.star-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 490px;
+  background: rgba(18, 10, 23, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-gold-medium);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), var(--glow-gold-lg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: var(--z-modal);
+  transition: opacity var(--duration-normal) var(--ease-cinematic),
+              transform var(--duration-normal) var(--ease-cinematic),
+              visibility var(--duration-normal) var(--ease-cinematic);
+  box-sizing: border-box;
+}
+
+.star-dialog.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.star-dialog-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold-subtle);
+  background: rgba(22, 13, 27, 0.6);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.star-dialog-close:hover,
+.star-dialog-close:focus-visible {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  transform: scale(1.1);
+}
+
+.star-dialog-star-badge {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  display: block;
+}
+
+.star-dialog-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(217, 181, 109, 0.2);
+  background-color: #0E0812;
+}
+
+.star-dialog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.star-dialog-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+  font-weight: 500;
+}
+
+.star-dialog-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   2. Feature 1: The Hidden Letter Scene (#scene-letter)
+   ========================================================================== */
+.scene-letter {
+  background: radial-gradient(circle at 50% 30%, #190D22 0%, #0E0714 55%, #09070B 95%);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(6rem, 10vw, 11rem) clamp(1.25rem, 4vw, 3.5rem);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.letter-ambient-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 60vw, 750px);
+  height: clamp(300px, 60vw, 750px);
+  background: radial-gradient(circle, rgba(201, 130, 155, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.letter-header {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.letter-seal-container {
+  margin: 3.5rem auto 1.5rem auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter-seal-btn {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2D1639 0%, #15091D 80%);
+  border: 1.5px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(217, 181, 109, 0.25);
+  transition: transform 0.4s var(--ease-cinematic),
+              box-shadow 0.4s var(--ease-cinematic),
+              border-color 0.4s var(--ease-cinematic);
+}
+
+.letter-seal-btn:hover,
+.letter-seal-btn:focus-visible {
+  transform: scale(1.12);
+  border-color: var(--accent-gold-light);
+  box-shadow: 0 0 35px rgba(217, 181, 109, 0.55), 0 0 15px rgba(201, 130, 155, 0.3);
+}
+
+.seal-ring {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  right: -7px;
+  bottom: -7px;
+  border: 1px dashed rgba(217, 181, 109, 0.35);
+  border-radius: 50%;
+  animation: seal-rotate 28s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes seal-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.seal-tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  white-space: nowrap;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.letter-seal-btn:hover .seal-tooltip,
+.letter-seal-btn:focus-visible .seal-tooltip {
+  opacity: 1;
+}
+
+/* Fullscreen Theatrical Letter Isolation Modal */
+.letter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: rgba(5, 3, 7, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: var(--z-modal);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-cinematic),
+              visibility 0.6s var(--ease-cinematic);
+  padding: clamp(1.5rem, 4vh, 3.5rem) clamp(1rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.letter-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.letter-envelope {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: auto 0;
+  background: linear-gradient(175deg, #180F20 0%, #120A17 55%, #0B060F 100%);
+  border: 1px solid var(--border-gold-medium);
+  border-radius: 18px;
+  padding: clamp(2rem, 4.5vw, 3.25rem) clamp(1.5rem, 4vw, 3rem);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(217, 181, 109, 0.15), inset 0 1px 0 rgba(217, 181, 109, 0.25);
+  transform: translateY(24px) scale(0.98);
+  transition: transform 0.6s var(--ease-cinematic);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.letter-modal.is-open .letter-envelope {
+  transform: translateY(0) scale(1);
+}
+
+.letter-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 181, 109, 0.35);
+  background: rgba(22, 13, 27, 0.85);
+  color: var(--accent-gold-light);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.letter-close-btn:hover,
+.letter-close-btn:focus-visible {
+  border-color: var(--accent-gold);
+  background: rgba(217, 181, 109, 0.2);
+  color: var(--text-primary);
+  transform: scale(1.08);
+}
+
+.letter-emblem-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  padding: 0.35rem 0.95rem;
+  border: 1px solid rgba(217, 181, 109, 0.28);
+  border-radius: 100px;
+  background: rgba(217, 181, 109, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.letter-salutation {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  padding-right: 2.5rem;
+}
+
+.letter-body {
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.82;
+  color: var(--text-primary);
+  margin-bottom: 1.75rem;
+  opacity: 0.96;
+}
+
+.letter-body p {
+  margin-bottom: 1.15rem;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-signature {
+  border-top: 1px solid rgba(217, 181, 109, 0.18);
+  padding-top: 1.25rem;
+  text-align: right;
+}
+
+.letter-signature p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.letter-signature strong {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.08rem, 1.5vw, 1.28rem);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   3. Feature 3: Micro Discovery Secret Whisper Toast
+   ========================================================================== */
+.hero-date-badge.micro-discovery-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--accent-gold);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hero-date-badge.micro-discovery-btn:hover,
+.hero-date-badge.micro-discovery-btn:focus-visible {
+  color: var(--accent-gold-light);
+  text-shadow: 0 0 12px rgba(217, 181, 109, 0.5);
+}
+
+.micro-whisper-toast {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-25px);
+  max-width: 90%;
+  width: 540px;
+  background: rgba(18, 10, 23, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--accent-gold);
+  border-radius: 36px;
+  padding: 0.95rem 1.6rem;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(217, 181, 109, 0.35);
+  z-index: calc(var(--z-modal) + 10);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-cinematic),
+              transform 0.5s var(--ease-cinematic),
+              visibility 0.5s var(--ease-cinematic);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  box-sizing: border-box;
+}
+
+.micro-whisper-toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.micro-whisper-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.micro-whisper-close {
+  background: none;
+  border: none;
+  color: var(--accent-gold);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.micro-whisper-close:hover {
+  transform: scale(1.15);
+  color: var(--accent-gold-light);
+}
+
+/* ==========================================================================
+   Mobile Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .constellation-wrapper {
+    height: 420px;
+    border-radius: 12px;
+  }
+
+  .constellation-status {
+    bottom: 0.9rem;
+    left: 1rem;
+    font-size: 10px;
+  }
+
+  .constellation-hint {
+    top: 0.9rem;
+    right: 1rem;
+    font-size: 10px;
+  }
+
+  .star-dialog {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .letter-envelope {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .letter-body {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+  .micro-whisper-toast {
+    width: 92%;
+    border-radius: 20px;
+    padding: 0.85rem 1.15rem;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Mode
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .seal-ring {
+    animation: none !important;
+  }
+  .star-dialog,
+  .letter-modal,
+  .letter-envelope,
+  .micro-whisper-toast {
+    transition: none !important;
+  }
+}

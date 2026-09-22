@@ -1,0 +1,290 @@
+/* ==========================================================================
+   Phase 2: Cinematic Hero Reveal Styles
+   Movie Poster & Luxury Editorial Magazine Cover Aesthetics
+   ========================================================================== */
+
+.scene-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  z-index: var(--z-content);
+  box-sizing: border-box;
+}
+
+/* Background Media & Cinematic Scrims */
+.hero-media-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: blur(24px) brightness(0.5);
+  opacity: 0;
+  transform: scale(1.05);
+  transition: filter 1.6s var(--ease-cinematic),
+              opacity 1.5s var(--ease-cinematic),
+              transform 1.6s var(--ease-cinematic);
+  will-change: filter, opacity, transform;
+}
+
+.hero-photo.is-revealed {
+  filter: blur(0px) brightness(0.88);
+  opacity: 1;
+  transform: scale(1.00);
+  animation: hero-idle-breathe 16s ease-in-out infinite alternate 1.8s;
+}
+
+/* Idle subtle breathing movement */
+@keyframes hero-idle-breathe {
+  0% { transform: scale(1.00) translateY(0); }
+  50% { transform: scale(1.025) translateY(-4px); }
+  100% { transform: scale(1.00) translateY(0); }
+}
+
+/* Atmospheric Editorial Scrim */
+.hero-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(9, 7, 11, 0.75) 0%, 
+    rgba(9, 7, 11, 0.15) 35%, 
+    rgba(9, 7, 11, 0.35) 65%, 
+    rgba(9, 7, 11, 0.95) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Dynamic Scroll Darken Layer */
+.hero-darken-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #09070B;
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+/* Hero Masthead (Top Bar) */
+.hero-masthead {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 1.2s var(--ease-cinematic),
+              transform 1.2s var(--ease-cinematic);
+}
+
+.hero-masthead.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-date-badge {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+}
+
+.hero-story-tag {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Hero Editorial Center / Lower Region */
+.hero-content {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin: auto auto 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  will-change: transform;
+}
+
+/* Magazine Issue Metadata Tags */
+.hero-issue-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1s var(--ease-cinematic),
+              transform 1s var(--ease-cinematic);
+}
+
+.hero-issue-tags.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-tag-item {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.hero-tag-item.highlight {
+  color: var(--accent-gold);
+}
+
+.hero-tag-separator {
+  color: rgba(217, 181, 109, 0.4);
+  font-size: 0.8em;
+}
+
+/* Main Title Mask Reveal */
+.hero-title-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5EFE5 45%, #D9B56D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  clip-path: inset(0% 100% 0% 0%);
+  transition: clip-path 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: clip-path;
+}
+
+.hero-title.is-revealed {
+  clip-path: inset(0% 0% 0% 0%);
+}
+
+/* Poetic Subtitle */
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 2.1rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  max-width: 48ch;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s var(--ease-cinematic),
+              transform 1.2s var(--ease-cinematic);
+  line-height: 1.4;
+}
+
+.hero-subtitle.is-revealed {
+  opacity: 0.95;
+  transform: translateY(0);
+}
+
+/* Scroll Exploration Hint */
+.hero-scroll-hint {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1.2s var(--ease-cinematic),
+              transform 1.2s var(--ease-cinematic);
+}
+
+.hero-scroll-hint.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-line {
+  width: 45px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-gold), transparent);
+}
+
+.scroll-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Portrait Mobile Hero Specifics */
+@media (max-width: 768px) {
+  .hero-masthead {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-photo {
+    object-position: center 20%;
+  }
+
+  .hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .hero-issue-tags {
+    gap: 0.5rem 0.85rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo.is-revealed {
+    animation: none !important;
+  }
+  .hero-title {
+    clip-path: none !important;
+    transition: opacity 0.5s ease !important;
+  }
+}

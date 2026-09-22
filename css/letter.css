@@ -1,0 +1,289 @@
+/**
+ * Phase 7: The Personal Letter Stylesheet
+ * Quiet, spacious, intimate sanctuary with warm spotlight illumination,
+ * elegant editorial serif typography, and progressive reveals.
+ */
+
+/* Main Personal Letter Section */
+.scene-personal-letter {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #060408;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6.5rem, 15vh, 13rem) clamp(1.5rem, 6vw, 4.5rem);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Subtle Warm Spotlight Effect */
+.letter-spotlight {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1000px, 140vw);
+  height: min(850px, 120vh);
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 45%,
+    rgba(217, 181, 109, 0.08) 0%,
+    rgba(201, 130, 155, 0.035) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: letter-spotlight-breathe 14s ease-in-out infinite alternate;
+}
+
+@keyframes letter-spotlight-breathe {
+  0% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+}
+
+/* Central Letter Container */
+.personal-letter-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Opening Hook */
+.letter-hook-wrapper {
+  margin-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+.letter-hook {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--accent-gold);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 25px rgba(217, 181, 109, 0.25);
+  margin: 0;
+}
+
+/* Letter Body & Paragraphs */
+.letter-body-flow {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 5vh, 3.75rem);
+}
+
+.letter-para {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.05vw, 1.55rem);
+  font-weight: 400;
+  line-height: 2.05;
+  color: #EFE8DE;
+  letter-spacing: 0.012em;
+}
+
+/* Intentional Line Break Styling */
+.letter-line {
+  display: block;
+  margin-bottom: 0.25em;
+}
+
+.letter-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Climax Gratitude Statement */
+.letter-gratitude-wrapper {
+  margin-top: clamp(2rem, 4.5vh, 3.5rem);
+  padding-top: clamp(1.75rem, 4vh, 2.5rem);
+  border-top: 1px solid rgba(217, 181, 109, 0.15);
+}
+
+.letter-gratitude {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-gold-light);
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 30px rgba(217, 181, 109, 0.35);
+  margin: 0;
+}
+
+/* Handwritten Signature Treatment */
+.letter-signature-block {
+  margin-top: clamp(3rem, 6.5vh, 4.75rem);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.letter-signature-signoff {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  color: var(--text-secondary);
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.03em;
+}
+
+.letter-signature-author {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 20px rgba(217, 181, 109, 0.3);
+}
+
+/* Progressive Reveal Timing States */
+.letter-reveal-item {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(5px);
+  transition: opacity 1.1s var(--ease-cinematic),
+              transform 1.1s var(--ease-cinematic),
+              filter 1.1s var(--ease-cinematic);
+  will-change: opacity, transform, filter;
+}
+
+.letter-reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Gentle Transition Bridge to the Final Scene */
+.letter-finale-bridge {
+  margin-top: clamp(5rem, 12vh, 8.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.2s var(--ease-cinematic),
+              transform 1.2s var(--ease-cinematic);
+}
+
+.letter-finale-bridge.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.finale-bridge-leadin {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.finale-bridge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  background: rgba(17, 11, 22, 0.7);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 9999px;
+  color: var(--accent-gold);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-cinematic);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.finale-bridge-btn:hover,
+.finale-bridge-btn:focus-visible {
+  border-color: var(--accent-gold);
+  background: rgba(26, 17, 34, 0.9);
+  box-shadow: 0 0 25px rgba(217, 181, 109, 0.35);
+  transform: translateY(-2px);
+}
+
+.finale-bridge-chevron {
+  width: 14px;
+  height: 14px;
+  animation: bridge-chevron-bounce 2.2s infinite ease-in-out;
+}
+
+@keyframes bridge-chevron-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Discreet Keepsake Seal Anchor at Foot of Letter */
+.letter-keepsake-anchor {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile & Performance Safeguards */
+@media (max-width: 768px) {
+  .scene-personal-letter {
+    padding: 5.5rem 1.5rem 7.5rem 1.5rem;
+  }
+
+  .letter-spotlight {
+    animation: none;
+    opacity: 0.85;
+  }
+
+  /* Remove blur on mobile GPUs */
+  .letter-reveal-item {
+    filter: none !important;
+    transition: opacity 0.85s var(--ease-cinematic),
+                transform 0.85s var(--ease-cinematic);
+  }
+
+  .letter-para {
+    line-height: 1.9;
+  }
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  .letter-spotlight {
+    animation: none;
+  }
+
+  .letter-reveal-item,
+  .letter-finale-bridge {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .finale-bridge-chevron {
+    animation: none;
+  }
+}

@@ -1,0 +1,116 @@
+/**
+ * BASE GLOBAL STYLE SYSTEM & RESET
+ * Reset, Smooth Scroll, Accessible Focus, Selection, Scrollbar
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Media Elements */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form Controls Reset */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ==========================================================================
+   Accessible Focus States
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Selection Styling
+   ========================================================================== */
+::selection {
+  background: rgba(217, 181, 109, 0.35);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Custom Atmospheric Scrollbar
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 181, 109, 0.25);
+  border-radius: 4px;
+  border: 1px solid rgba(9, 7, 11, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 181, 109, 0.55);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 181, 109, 0.25) var(--bg-primary);
+}
+
+/* ==========================================================================
+   Reduced Motion Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
